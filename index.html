@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Платформа Mesto</title>
+  <meta name="description" content="Портфолио Александра Абрамова на Яндекс.Практикуме" />
+  <meta name="keywords" content="html, css, js" />
+  <meta name="author" content="Александр Абрамов" />
+  <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body class="page">
+
+  <header class="header">
+    <img src="./images/logo-white.svg" alt="Логотип Mesto" class="header__logo">
+  </header>
+
+  <main class="main">
+
+    <section class="profile">
+      <img src="./images/profile-logo.png" class="profile__avatar" alt="Логотип Пользователя">
+      <div class="profile__info-container">
+        <div class="profile__name-and-btn-container">
+          <h2 class="profile__name"><span>Александр Абрамов</span><button class="profile__edit-btn"></button></h2>
+        </div>
+        <p class="profile__about">Исследователь океана</p>
+      </div>
+      <button class="profile__add-btn"></button>
+    </section>
+
+    <section class="popup">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__name-input" placeholder="Как зовут?" value="">
+        <input type="text" class="popup__about-input" placeholder="Коротко о себе" value="">
+        <button class="popup__submit-btn">Сохранить</button>
+      </div>
+      <button class="popup__close-btn"></button>
+    </section>
+
+    <section class="elements">
+      <div class="element">
+        <img src="./images/photo-grid-baikal.jpg" alt="Байкал" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Байкал</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/place-kolsky.jpg" alt="Кольский полуостров" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Кольский полуостров</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/photo-grid-elbrus.jpg" alt="Эльбрус" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Эльбрус</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/place-karelia.jpg" alt="Карелия" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Карелия</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/photo-grid-sochi.jpg" alt="Сочи" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Сочи</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/place-altai.jpg" alt="Алтай" class="element__image">
+        <div class="element__mesto-container">
+          <h2 class="element__title">Алтай</h2>
+          <button class="element__like-btn"></button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer__author">&copy; 2022 Mesto Russia</p>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

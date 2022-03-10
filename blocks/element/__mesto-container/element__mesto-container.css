@@ -1,0 +1,6 @@
+.element__mesto-container {
+  display: flex;
+  background-color: #FFFFFF;
+  align-items: center;
+  justify-content: space-between;
+}

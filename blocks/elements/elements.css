@@ -1,0 +1,28 @@
+.elements {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: row dense;
+  padding: 0 48px;
+  gap: 20px 17px;
+  width: calc (880 / 1280 * 100%);
+  margin: 50px auto 0 auto;
+  max-width: 880px;
+  justify-content: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .elements {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .elements {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: 36px 0 0 0;
+  }
+}
