@@ -21,4 +21,4 @@ HTMLv5
 Сделать кликабельными лайки в карточках
 
 ## Ссылка на GitHub Pages
-https://alexanderabramovpraktikum.github.io/russian-travel/
+https://alexanderabramovpraktikum.github.io/mesto/
