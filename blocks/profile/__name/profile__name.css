@@ -1,5 +1,5 @@
 .profile__name {
-  font-family: Inter;
+  font-family: Inter, Arial;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -7,16 +7,26 @@
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  width: auto;
-  min-width: min-content;
   max-width: 500px;
   justify-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1279px) {
   .profile__name {
-    font-size: calc(27px + (42 - 27) * ((100vw - 320px) / (768 - 320)));
-    line-height: calc(33px + (48 - 33) * ((100vw - 320px) / (768 - 320)));
+    font-size: calc(27px + (42 - 27) * ((100vw - 768px) / (1279 - 768)));
+    line-height: calc(33px + (48 - 33) * ((100vw - 768px) / (1279 - 768)));
+    max-width: calc(300px + (500 - 300) * ((100vw - 768px) / (1279 - 768)));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
     text-align: center;
+    max-width: calc(192px + (500 - 300) * ((100vw - 320px) / (768 - 320)));
   }
 }

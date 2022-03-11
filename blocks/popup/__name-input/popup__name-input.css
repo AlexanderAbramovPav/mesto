@@ -1,18 +1,6 @@
 .popup__name-input {
-  padding: 0;
-  margin: 54px 36px 0 36px;
-  width: auto;
-  min-height: 27px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
+  margin: 38px 36px 0 36px;
+  height: 35px;
 }
 
 @media screen and (max-width: 767px) {

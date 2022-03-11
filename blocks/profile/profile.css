@@ -9,10 +9,9 @@
 }
 
 @media screen and (max-width: 767px) {
-  .profile {
-    flex-direction: column;
-    align-items: center;
-    margin: 42px calc(19px + (117 - 19) * ((100vw - 320px) / (768 - 320))) 0 calc(19px + (117 - 19) * ((100vw - 320px) / (768 - 320)));
-    width: auto;
-  }
+.profile {
+  flex-direction: column;
+  margin: 42px calc(19px + (117 - 19) * ((100vw - 320px) / (768 - 320))) 0 calc(19px + (117 - 19) * ((100vw - 320px) / (768 - 320)));
+  width: auto;
+}
 }

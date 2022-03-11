@@ -10,6 +10,11 @@
   background-position: center;
   transition: 0.3s ease-in-out opacity;
   cursor: pointer;
+  display: flex;
+  position: absolute;
+  right: -40px;
+  top: 15px;
+  z-index: 2;
 }
 
 .profile__edit-btn:hover {
@@ -21,5 +26,7 @@
     margin: 0 0 0 10px;
     min-width: 18px;
     min-height: 18px;
+    right: -25px;
+    top: 10px;
   }
 }

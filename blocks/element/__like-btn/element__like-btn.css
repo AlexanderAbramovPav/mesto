@@ -1,7 +1,7 @@
 .element__like-btn {
   display: flex;
   padding: 0;
-  margin: 0 30px 0 30px;
+  margin: 0 20px 0 25px;
   background-color: transparent;
   background-image: url(../../../images/vector-like-empty.svg);
   min-width: 22px;
@@ -13,5 +13,5 @@
 }
 
 .element__like-btn:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }

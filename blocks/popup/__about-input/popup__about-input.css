@@ -1,22 +1,10 @@
 .popup__about-input {
-  padding: 0;
-  margin: 30px 36px 0 36px;
-  width: auto;
-  min-height: 27px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
+  margin: 22px 36px 0 36px;
+  height: 35px;
 }
 
 @media screen and (max-width: 767px) {
   .popup__about-input {
-    margin: 30px calc(22px + (36 - 22) * ((100vw - 320px) / (768 - 320))) 0 calc(22px + (36 - 22) * ((100vw - 320px) / (768 - 320)));
+    margin: 22px calc(22px + (36 - 22) * ((100vw - 320px) / (768 - 320))) 0 calc(22px + (36 - 22) * ((100vw - 320px) / (768 - 320)));
   }
 }

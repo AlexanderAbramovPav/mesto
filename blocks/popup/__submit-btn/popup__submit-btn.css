@@ -1,4 +1,5 @@
 .popup__submit-btn {
+  display: block;
   padding: 0;
   margin: 48px 36px 37px 36px;
   width: auto;

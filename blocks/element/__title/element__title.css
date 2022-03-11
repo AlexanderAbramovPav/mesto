@@ -1,7 +1,7 @@
 .element__title {
   padding: 0;
-  margin: 25px 0 31px 21px;
-  font-family: Inter;
+  margin: 25px 0 27px 21px;
+  font-family: Inter, Arial;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -11,3 +11,11 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+
+@media screen and (max-width: 767px) {
+  .element__title {
+    margin: 23px 0 27px 21px;
+  }
+}
+
