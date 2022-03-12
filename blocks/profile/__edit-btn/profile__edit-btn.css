@@ -11,7 +11,7 @@
   transition: 0.3s ease-in-out opacity;
   cursor: pointer;
   display: grid;
-  grid-area: 'button';
+  grid-area: button;
 }
 
 .profile__edit-btn:hover {

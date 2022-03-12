@@ -1,6 +1,6 @@
 .profile__name {
-  display: grid;
-  grid-area: 'name';
+  display: block;
+  grid-area: name;
   font-family: Inter, Arial;
   font-style: normal;
   font-weight: 500;
@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   width: auto;
-  justify-items: center;
+  justify-items: left;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

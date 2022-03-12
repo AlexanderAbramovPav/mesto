@@ -1,6 +1,6 @@
 .profile__about {
   display: block;
-  grid-area: 'about';
+  grid-area: about;
   font-family: Inter, Arial;
   font-style: normal;
   font-weight: normal;
@@ -10,6 +10,7 @@
   margin: 8px 0 0 0;
   padding: 0;
   width: auto;
+  justify-items: left;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
