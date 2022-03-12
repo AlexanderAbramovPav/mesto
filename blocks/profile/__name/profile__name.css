@@ -1,4 +1,6 @@
 .profile__name {
+  display: grid;
+  grid-area: 'name';
   font-family: Inter, Arial;
   font-style: normal;
   font-weight: 500;
@@ -7,7 +9,7 @@
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  max-width: 500px;
+  width: auto;
   justify-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -16,6 +18,7 @@
 
 @media screen and (max-width: 1279px) {
   .profile__name {
+    display: block;
     font-size: calc(27px + (42 - 27) * ((100vw - 768px) / (1279 - 768)));
     line-height: calc(33px + (48 - 33) * ((100vw - 768px) / (1279 - 768)));
     max-width: calc(300px + (500 - 300) * ((100vw - 768px) / (1279 - 768)));
@@ -24,9 +27,11 @@
 
 @media screen and (max-width: 768px) {
   .profile__name {
+    display: block;
     font-size: 27px;
     line-height: 33px;
     text-align: center;
+    align-items: center;
     max-width: calc(192px + (500 - 300) * ((100vw - 320px) / (768 - 320)));
   }
 }
