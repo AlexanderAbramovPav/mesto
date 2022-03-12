@@ -5,12 +5,13 @@
   width: 150px;
   min-width: 50px;
   background-color: black;
-  border: solid 1px #FFFFFF;
+  border: solid 2px #FFFFFF;
   background-image: url(../../../images/vector-plus.svg);
   background-repeat: no-repeat;
   background-position: center;
   transition: 0.3s ease-in-out opacity;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__add-btn:hover {

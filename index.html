@@ -112,26 +112,27 @@
     </footer>
 
     <div class="popup">
-      <form class="popup__container">
+      <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input
-          type="text"
-          class="popup__input popup__name-input popup__name"
-          placeholder="Как зовут?"
-          name="author-name"
-          required
-        />
-        <input
-          type="text"
-          class="popup__input popup__about-input popup__about"
-          placeholder="Коротко о себе"
-          name="author-about"
-          required
-        />
-        <button class="popup__submit-btn" aria-label="Сохранить информацию о себе" type="submit" name="submit-button">Сохранить</button>
+        <form class="popup__form" name="form-edit-profile">
+          <input
+            type="text"
+            class="popup__input popup__name-input popup__input_type_name"
+            placeholder="Как зовут?"
+            name="author-name"
+            required
+          />
+          <input
+            type="text"
+            class="popup__input popup__about-input popup__input_type_about"
+            placeholder="Коротко о себе"
+            name="author-about"
+            required
+          />
+          <button class="popup__submit-btn" aria-label="Сохранить информацию о себе" type="submit" name="submit-button">Сохранить</button>
+        </form>
         <button class="popup__close-btn" type="button" aria-label="Закрыть карточку информации о себе"></button>
-      </form>
-
+      </div>
     </div>
 
     <script src="./script/script.js"></script>
