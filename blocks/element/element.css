@@ -7,5 +7,6 @@
   border-radius: 10px;
   border-collapse: separate;
   overflow: hidden;
+  position: relative;
 }
 

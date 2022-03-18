@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
-  <body class="page">
+  <body class="page page_preload">
     <header class="header">
       <img
         src="./images/logo-white.svg"
@@ -32,78 +32,12 @@
         <div class="profile__info-container">
           <h1 class="profile__name">Александр Абрамов</h1>
           <button class="profile__edit-btn" type="button" aria-label="Изменение информации о себе"></button>
-          <p class="profile__about">Исследователь океана и кораболей</p>
+          <p class="profile__about">Исследователь океана и кораблей</p>
         </div>
         <button class="profile__add-btn" type="button" aria-label="Добаление новой карточки"></button>
       </section>
 
       <section class="elements">
-        <div class="element">
-          <img
-            src="./images/photo-grid-baikal.jpg"
-            alt="Байкал"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Байкал</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/place-kolsky.jpg"
-            alt="Кольский полуостров"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Кольский полуостров</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/photo-grid-elbrus.jpg"
-            alt="Эльбрус"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Эльбрус</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/place-karelia.jpg"
-            alt="Карелия"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Карелия</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/photo-grid-sochi.jpg"
-            alt="Сочи"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Сочи</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/place-altai.jpg"
-            alt="Алтай"
-            class="element__image"
-          />
-          <div class="element__mesto-container">
-            <h2 class="element__title">Алтай</h2>
-            <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
-          </div>
-        </div>
       </section>
     </main>
 
@@ -111,10 +45,10 @@
       <p class="footer__author">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup-edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="form-edit-profile">
+        <form class="popup__form popup-edit-form" name="form-edit-profile">
           <input
             type="text"
             class="popup__input popup__input_type_name"
@@ -129,12 +63,63 @@
             name="author-about"
             required
           />
-          <button class="popup__submit-btn" aria-label="Сохранить информацию о себе" type="submit" name="submit-button">Сохранить</button>
+          <button class="popup__submit-btn popup-edit-submit-btn" aria-label="Сохранить информацию о себе" type="submit" name="submit-button">Сохранить</button>
         </form>
-        <button class="popup__close-btn" type="button" aria-label="Закрыть карточку информации о себе"></button>
+        <button class="popup__close-btn popup-edit-close-btn" type="button" aria-label="Закрыть карточку информации о себе"></button>
       </div>
     </div>
 
-    <script src="./script/script.js"></script>
+    <div class="popup popup-add">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup-add-form" name="form-new-place">
+          <input
+            type="text"
+            class="popup__input popup__input_type_place"
+            placeholder="Название места"
+            name="place-name"
+            required
+          />
+          <input
+            type="text"
+            class="popup__input popup__input_type_link"
+            placeholder="Ссылка на картинку"
+            name="place-link"
+            required
+          />
+          <button class="popup__submit-btn" aria-label="Создать карточку" type="submit" name="submit-button">Создать</button>
+        </form>
+        <button class="popup__close-btn popup-add-close-btn" type="button" aria-label="Закрыть окно создания карточки"></button>
+      </div>
+    </div>
+
+    <div class="popup popup-img">
+      <div class="popup__img-container">
+        <img
+            src="./images/place-altai.jpg"
+            alt="Алтай"
+            class="popup__image"
+          />
+          <p class="popup__img-title">Алтай</p>
+          <button class="popup__close-btn popup-img-close-btn" type="button" aria-label="Закрыть карточку"></button>
+      </div>
+    </div>
+
+    <template id="element-template">
+      <div class="element">
+        <img
+          src=""
+          alt=""
+          class="element__image"
+        />
+        <button class="element__trash-btn" type="button" aria-label="Удалить карточку"></button>
+        <div class="element__mesto-container">
+          <h2 class="element__title"></h2>
+          <button class="element__like-btn" type="button" aria-label="Поставить Лайк карточке"></button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./script/script.js">  </script>
   </body>
 </html>
