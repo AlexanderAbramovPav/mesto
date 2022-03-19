@@ -81,7 +81,7 @@ function createCard (card) {
     openPopup(popupImg);
   });
 
-  renderCard(cardElement, elements);
+  return cardElement;
 }
 
 function renderCard(card, container) {
@@ -89,7 +89,10 @@ function renderCard(card, container) {
 }
 
 function renderCards (initialCards) {
-  initialCards.forEach (createCard);
+  initialCards.forEach (function (card) {
+    const newCard = createCard(card);
+    renderCard(newCard, elements);
+  });
 }
 
 function openPopup(popup) {
@@ -125,8 +128,11 @@ function popupAddSubmit(evt) {
       link: addLinkInput.value
     };
 
-  createCard (card);
+  const newCard = createCard(card);
+  renderCard(newCard, elements);
 
+  addNameInput.value = "";
+  addLinkInput.value = "";
   closePopup(popupAdd);
 }
 
