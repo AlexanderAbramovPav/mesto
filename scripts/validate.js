@@ -69,14 +69,24 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
+// Блокируем кнопку Submit
+const disableSubmitBtn = (buttonElement, validationParameters) => {
+  buttonElement.classList.add(validationParameters.inactiveButtonClass);
+  buttonElement.disabled = true;
+}
+
+// Активируем кнопку Submit
+const enableSubmitBtn = (buttonElement, validationParameters) => {
+  buttonElement.classList.remove(validationParameters.inactiveButtonClass);
+  buttonElement.disabled = false;
+}
+
 // Переключатель кнопки
 const toggleButtonState = (inputList, buttonElement, validationParameters) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validationParameters.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableSubmitBtn(buttonElement, validationParameters)
   } else {
-    buttonElement.classList.remove(validationParameters.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enableSubmitBtn(buttonElement, validationParameters)
   }
 };
 

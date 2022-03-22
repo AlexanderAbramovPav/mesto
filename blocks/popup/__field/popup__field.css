@@ -1,8 +1,7 @@
 .popup__field {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-items: flex-start;
+  position: relative;
 }
 
 .popup__field:first-of-type {
@@ -11,7 +10,7 @@
 }
 
 .popup__field:last-of-type {
-  margin: 22px 36px 0 36px;
+  margin: 37px 36px 0 36px;
   height: 35px;
 }
 

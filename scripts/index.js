@@ -9,6 +9,7 @@ const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 const editButton = profile.querySelector('.profile__edit-btn');
 const popupEditForm = popupEdit.querySelector('.popup-edit-form');
+const popupEditSubmitBtn = popupEdit.querySelector('.popup-edit-submit-btn');
 const popupEditCloseButton = popupEdit.querySelector('.popup-edit-close-btn');
 const profileNameInput = popupEdit.querySelector('.popup__input_type_name');
 const profileAboutInput = popupEdit.querySelector('.popup__input_type_about');
@@ -19,6 +20,7 @@ const popupAddForm = popupAdd.querySelector('.popup-add-form');
 const addButton = profile.querySelector('.profile__add-btn');
 const addNameInput = popupAdd.querySelector('.popup__input_type_place');
 const addLinkInput = popupAdd.querySelector('.popup__input_type_link');
+const addSubmitButton = popupAdd.querySelector('.popup__add-submit-btn');
 
 const popupImg = document.querySelector('.popup-img');
 const imgButton = elements.querySelector('.element__image');
@@ -89,7 +91,7 @@ function closePopupEsc(evt) {
 }
 
 popupAll.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
+  popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup__close-btn') || evt.target.classList.contains('popup_opened')) {
       closePopup(popup);
     }
@@ -98,6 +100,7 @@ popupAll.forEach((popup) => {
 
 function handleOpenProfilePopup() {
 
+  enableSubmitBtn(popupEditSubmitBtn, validationParameters)
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileAbout.textContent;
   openPopup(popupEdit);
@@ -124,14 +127,16 @@ function handleSubmitAddCardPopup(evt) {
   const newCard = createCard(card);
   renderCard(newCard, elements);
 
-  addNameInput.reset();
-  addLinkInput.reset();
+  popupAddForm.reset();
+  disableSubmitBtn(addSubmitButton, validationParameters);
+
   closePopup(popupAdd);
 }
 
 renderCards (initialCards);
 
 editButton.addEventListener('click', handleOpenProfilePopup);
+
 popupEditCloseButton.addEventListener('click', function () {
   closePopup(popupEdit);
 });
@@ -141,8 +146,7 @@ addButton.addEventListener('click', function () {
   openPopup(popupAdd);
 });
 popupAddCloseButton.addEventListener('click', function () {
-  addNameInput.reset();
-  addLinkInput.reset();
+  popupAddForm.reset();
   closePopup(popupAdd);
 });
 popupAddForm.addEventListener('submit', handleSubmitAddCardPopup);
