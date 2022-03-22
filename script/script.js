@@ -1,35 +1,8 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-
 const elementTemplateContent = document.querySelector('#element-template').content
 const elements = document.querySelector('.elements');
 const element = elements.querySelector('.element');
 
+const popupAll = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup-edit');
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -97,10 +70,37 @@ function renderCards (initialCards) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+}
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
+  }
+}
+
+popupAll.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup__close-btn')) {
+      closePopup(popup);
+  }
+    if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+    }
+  });
+});
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
+  }
 }
 
 function popupEditOpen() {

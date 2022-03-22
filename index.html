@@ -48,21 +48,33 @@
     <div class="popup popup-edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup-edit-form" name="form-edit-profile">
-          <input
-            type="text"
-            class="popup__input popup__input_type_name"
-            placeholder="Как зовут?"
-            name="author-name"
-            required
-          />
-          <input
-            type="text"
-            class="popup__input popup__input_type_about"
-            placeholder="Коротко о себе"
-            name="author-about"
-            required
-          />
+        <form class="popup__form popup-edit-form " name="form-edit-profile" novalidate>
+          <label class="popup__field">
+            <input
+              type="text"
+              class="popup__input popup__input_type_name"
+              placeholder="Как зовут?"
+              name="author-name"
+              required
+              minlength="2"
+              maxlength="40"
+              id="text-name-input"
+            />
+            <span class="popup__error text-name-input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input
+              type="text"
+              class="popup__input popup__input_type_about"
+              placeholder="Коротко о себе"
+              name="author-about"
+              required
+              minlength="2"
+              maxlength="200"
+              id="text-about-input"
+            />
+            <span class="popup__error text-about-input-error"></span>
+          </label>
           <button class="popup__submit-btn popup-edit-submit-btn" aria-label="Сохранить информацию о себе" type="submit" name="submit-button">Сохранить</button>
         </form>
         <button class="popup__close-btn popup-edit-close-btn" type="button" aria-label="Закрыть карточку информации о себе"></button>
@@ -72,21 +84,31 @@
     <div class="popup popup-add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup-add-form" name="form-new-place">
-          <input
+        <form class="popup__form popup-add-form" name="form-new-place" novalidate>
+          <label class="popup__field">
+            <input
             type="text"
             class="popup__input popup__input_type_place"
             placeholder="Название места"
             name="place-name"
             required
+            minlength="2"
+            maxlength="30"
+            id="text-input"
           />
-          <input
-            type="text"
-            class="popup__input popup__input_type_link"
-            placeholder="Ссылка на картинку"
-            name="place-link"
-            required
-          />
+            <span class="popup__error text-input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input
+              type="url"
+              class="popup__input popup__input_type_link"
+              placeholder="Ссылка на картинку"
+              name="place-link"
+              required
+              id="url-input"
+            />
+            <span class="popup__error url-input-error"></span>
+          </label>
           <button class="popup__submit-btn" aria-label="Создать карточку" type="submit" name="submit-button">Создать</button>
         </form>
         <button class="popup__close-btn popup-add-close-btn" type="button" aria-label="Закрыть окно создания карточки"></button>
@@ -118,6 +140,8 @@
       </div>
     </template>
 
+    <script src="./script/cards.js">  </script>
     <script src="./script/script.js">  </script>
+    <script src="./script/validate.js">  </script>
   </body>
 </html>
