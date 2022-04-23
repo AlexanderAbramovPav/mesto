@@ -1,32 +1,9 @@
+import {openPopup, closePopup, closePopupEsc, popupImg, popumImgInfo, popumImgContent} from './utils.js'
+import {initialCards} from './initialCards.js'
 import {FormValidator} from './FormValidator.js'
 import {Card} from './Card.js'
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 
 const validationParameters =  {
   formSelector: '.popup__form',
@@ -57,7 +34,6 @@ const addButton = profile.querySelector('.profile__add-btn');
 const addNameInput = popupAdd.querySelector('.popup__input_type_place');
 const addLinkInput = popupAdd.querySelector('.popup__input_type_link');
 
-const popupImg = document.querySelector('.popup-img');
 const popupImgCloseButton = popupImg.querySelector('.popup-img-close-btn');
 
 const editForm = popupEdit.querySelector('.popup__form');
@@ -69,6 +45,11 @@ const addValidator = new FormValidator(validationParameters, addForm);
 editValidator.enableValidation();
 addValidator.enableValidation();
 
+function fillCard(data) {
+  const newCard = new Card(data, '#element-template');
+  const newCardCreated = newCard.createCard();
+  renderCard(newCardCreated, elements);
+};
 
 function renderCard(card, container) {
   container.prepend(card);
@@ -76,32 +57,10 @@ function renderCard(card, container) {
 
 
 function renderCards (initialCards) {
-  initialCards.forEach (function (data) {
-    const newCard = new Card(data, '#element-template');
-    const newCardCreated = newCard.createCard();
-    renderCard(newCardCreated, elements);
+  initialCards.forEach ((data) => {
+    fillCard(data)
   });
 }
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEsc);
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-}
-
-function closePopupEsc(evt) {
-  if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_opened');
-      closePopup(openedPopup);
-      editValidator.resetError();
-      addValidator.resetError();
-  }
-}
-
 
 function handleOpenProfilePopup() {
 
@@ -126,9 +85,7 @@ function handleSubmitAddCardPopup(evt) {
       link: addLinkInput.value
     };
 
-  const newCard = new Card(data, '#element-template');
-  const newCardCreated = newCard.createCard();
-  renderCard(newCardCreated, elements);
+  fillCard(data);
   popupAddForm.reset();
   addValidator.disableSubmitBtn();
   closePopup(popupAdd);
@@ -140,8 +97,6 @@ popupAll.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup__close-btn') || evt.target.classList.contains('popup_opened')) {
       closePopup(popup);
-      editValidator.resetError();
-      addValidator.resetError();
     }
   });
 });
@@ -152,15 +107,16 @@ popupEditCloseButton.addEventListener('click', function () {
   editValidator.resetError();
   closePopup(popupEdit);
 });
+
 popupEditForm.addEventListener('submit', handleSubmitProfilePopup);
 
 addButton.addEventListener('click', function () {
+  addValidator.resetError();
   openPopup(popupAdd);
 });
 
 popupAddCloseButton.addEventListener('click', function () {
   popupAddForm.reset();
-  addValidator.resetError();
   closePopup(popupAdd);
 });
 
