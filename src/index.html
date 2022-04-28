@@ -10,13 +10,12 @@
     />
     <meta name="keywords" content="html, css, js" />
     <meta name="author" content="Александр Абрамов" />
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="page page_preload">
     <header class="header">
       <img
-        src="./images/logo-white.svg"
+        src="<%=require('./images/logo-white.svg')%>"
         alt="Логотип Mesto"
         class="header__logo"
       />
@@ -25,7 +24,7 @@
     <main class="main">
       <section class="profile">
         <img
-          src="./images/profile-logo.svg"
+          src="<%=require('./images/profile-logo.svg')%>"
           class="profile__avatar"
           alt="Логотип Пользователя"
         />
@@ -38,6 +37,7 @@
       </section>
 
       <section class="elements">
+
       </section>
     </main>
 
@@ -118,11 +118,11 @@
     <div class="popup popup-img">
       <div class="popup__img-container">
         <img
-            src="./images/place-altai.jpg"
-            alt="Алтай"
+            src=""
+            alt=""
             class="popup__image"
           />
-          <p class="popup__img-title">Алтай</p>
+          <p class="popup__img-title"></p>
           <button class="popup__close-btn popup-img-close-btn" type="button" aria-label="Закрыть карточку"></button>
       </div>
     </div>
@@ -140,6 +140,5 @@
       </div>
     </template>
 
-    <script type="module" src="./scripts/index.js">  </script>
   </body>
 </html>
