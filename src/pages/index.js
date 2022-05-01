@@ -38,8 +38,6 @@ addValidator.enableValidation();
 
 function createCard(item) {
   const newCard = new Card(item, {handleCardClick: () => {
-    const imgPopup = new PopupWithImage(popupImg);
-    imgPopup.setEventListeners(); // Каждый попап (под каждую картинку) создается один раз и один раз ему навешиваются слушатели
     imgPopup.open(item);
   }}, cardTemplateSelector);
   const cardElement = newCard.createCard();
@@ -53,6 +51,9 @@ const cardList = new Section({
     cardList.addItem(createCard(item));
   }
 }, sectionSelector);
+
+const imgPopup = new PopupWithImage(popupImg);
+imgPopup.setEventListeners(); // Каждый попап (под каждую картинку) создается один раз и один раз ему навешиваются слушатели
 
 cardList.renderItems();
 
