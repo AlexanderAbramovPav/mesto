@@ -1,4 +1,4 @@
-import './index.css';
+import './index.css'
 import {
   validationParameters,
   sectionSelector,
@@ -17,7 +17,7 @@ import {
   addForm,
   popupImg,
 } from '../scripts/utils/constants.js';
-import {initialCards} from '../scripts/components/initialCards.js';
+import {initialCards} from '../scripts/utils/utils.js';
 import {FormValidator} from '../scripts/components/FormValidator.js';
 import {Card} from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -39,13 +39,13 @@ addValidator.enableValidation();
 function createCard(item) {
   const newCard = new Card(item, {handleCardClick: () => {
     const imgPopup = new PopupWithImage(popupImg);
+    imgPopup.setEventListeners(); // Каждый попап (под каждую картинку) создается один раз и один раз ему навешиваются слушатели
     imgPopup.open(item);
   }}, cardTemplateSelector);
   const cardElement = newCard.createCard();
 
   return cardElement
 }
-
 
 const cardList = new Section({
   items: initialCards,
@@ -82,6 +82,8 @@ const newEditForm = new PopupWithForm (popupEdit, {handleFormSubmit: (profileVal
   }
 });
 
+newEditForm.setEventListeners();
+
 // Добавление новой карточки
 
 const addPopupForm = new PopupWithForm (popupAdd, {handleFormSubmit: (addValues) => {
@@ -96,3 +98,5 @@ addButton.addEventListener('click', () => {
   addValidator.disableSubmitBtn()
   addPopupForm.open();
 });
+
+addPopupForm.setEventListeners();
