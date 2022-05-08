@@ -7,12 +7,14 @@ export default class UserInfo {
   getUserInfo() {
     this._profileValues = {};
     this._profileValues.name = this._userName.textContent;
-    this._profileValues.info = this._userAbout.textContent;
+    this._profileValues.about = this._userAbout.textContent;
+    this._profileValues.id = this._userID;
     return this._profileValues;
   }
 
   setUserInfo(newUserData) {
+    this._userID = newUserData._id;
     this._userName.textContent = newUserData.name;
-    this._userAbout.textContent = newUserData.info;
+    this._userAbout.textContent = newUserData.about;
   }
 }
