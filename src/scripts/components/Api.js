@@ -34,7 +34,7 @@ export default class Api {
     return fetch(`${this._options.baseUrl}/cards`, {
       method: 'POST',
       headers: this._options.headers,
-      body: bodyOptions
+      body: JSON.stringify(bodyOptions)
     })
       .then(res => {
         return this._getServerStatus(res)
@@ -74,7 +74,7 @@ export default class Api {
     return fetch(`${this._options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._options.headers,
-      body: bodyOptions
+      body: JSON.stringify(bodyOptions)
     })
       .then(res => {
         return this._getServerStatus(res)
@@ -85,7 +85,7 @@ export default class Api {
     return fetch(`${this._options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._options.headers,
-      body: bodyOptions
+      body: JSON.stringify(bodyOptions)
     })
       .then(res => {
         return this._getServerStatus(res)

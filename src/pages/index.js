@@ -21,7 +21,11 @@ import {
   popupImg,
   popupDelete,
   popupAvatar,
-  profileAvatarInput
+  profileAvatarInput,
+  deleteSubmitButton,
+  editSubmitButton,
+  avatarSubmitButton,
+  addSubmitButton
 } from '../scripts/utils/constants.js';
 import {FormValidator} from '../scripts/components/FormValidator.js';
 import {Card} from '../scripts/components/Card.js';
@@ -52,21 +56,6 @@ const api = new Api({
   }
 });
 
-// Функция выключения возможности удалить карточку
-function disableCardDeletion(cardElement, item) {
-  if (userInfo.getUserInfo().id !== item.owner._id) {
-    cardElement.querySelector('.element__trash-btn').remove();
-  }
-}
-
-// Функция определения карточек, которые пользователь лайкнул
-function markLikedCard(cardElement, item) {
-  if (item.likes.some(list => list._id === userInfo.getUserInfo().id)) {
-    cardElement.querySelector('.element__like-btn').classList.add('element__like-btn_liked');
-  }
-}
-
-
 // Функция создания карточки
 
 function createCard(item) {
@@ -75,7 +64,7 @@ function createCard(item) {
       imgPopup.open(item);
     }},
     {handleTrashClick: () => {
-      deletePopup.open(item);
+      deletePopup.open(item, cardElement);
     }},
     {handleLikeClick: (cardId) => {
       if (item.likes.find(x => x._id === userInfo.getUserInfo().id)) {
@@ -83,6 +72,7 @@ function createCard(item) {
             .then(results => {
               item = results;
               newCard.updateLikes(item);
+              cardElement.querySelector('.element__like-btn').classList.remove('element__like-btn_liked');
             })
             .catch((err) => {
               console.log(err);
@@ -92,6 +82,7 @@ function createCard(item) {
             .then(results => {
               item = results;
               newCard.updateLikes(item);
+              cardElement.querySelector('.element__like-btn').classList.add('element__like-btn_liked')
             })
             .catch((err) => {
               console.log(err);
@@ -100,24 +91,20 @@ function createCard(item) {
     }},
     cardTemplateSelector
   );
+
+  newCard.disableCardDeletion(item, userInfo.getUserInfo().id);
+  newCard.markLikedCard(item, userInfo.getUserInfo().id);
+
   const cardElement = newCard.createCard();
-
-  disableCardDeletion(cardElement, item);
-  markLikedCard(cardElement, item);
-
   return cardElement
 }
 
-// Функция отрисовки карточек
-function renderCards(Cards) {
-  const cardList = new Section({
-    items: Cards,
+
+const cardList = new Section({
     renderer: (item) => {
       cardList.addItem(createCard(item));
     }
   }, sectionSelector);
-  cardList.renderItems();
-}
 
 
 // Попал просмотра карточки
@@ -128,27 +115,24 @@ imgPopup.setEventListeners();
 // Попал удаления карточки
 
 const deletePopup = new PopupWithConfirmation(popupDelete,
-  {handleFormSubmit: (data) => {
+  {handleFormSubmit: (data, cardElement) => {
 
-    const submitButton = document.querySelector(popupDelete).querySelector(validationParameters.submitButtonSelector);
-    submitButton.textContent = 'Удаление карточки...';
+    deleteSubmitButton.textContent = 'Удаление карточки...';
 
     api.deleteCard(data._id)
-      .then (() => {
-        api.getInitialCards()
-          .then((Cards) => {
-            document.querySelector(sectionSelector).innerHTML = '';
-            renderCards(Cards)
-          })
+      .then(() => {
+        cardElement.remove();
+        })
           .catch((err) => {
             console.log(err);
           })
           .then(() => {
-            submitButton.textContent = 'Карточка удалена';
+            deleteSubmitButton.textContent = 'Карточка удалена';
             deletePopup.close();
-            setTimeout(() => {submitButton.textContent = 'Да'}, 500);
           })
-      })
+          .finally(() => {
+            setTimeout(() => {deleteSubmitButton.textContent = 'Да'}, 500);
+          })
       .catch((err) => {
         console.log(err);
       })
@@ -158,12 +142,11 @@ deletePopup.setEventListeners();
 
 // Персональная информация
 
-const userInfo = new UserInfo(profileName, profileAbout);
+const userInfo = new UserInfo(profileName, profileAbout, '', profileAvatar);
 
 // Персональная информация. Получение инфы и отрисовка
   api.getUserInfo()
     .then((result) => {
-      profileAvatar.src = result.avatar;
       userInfo.setUserInfo(result);
     })
     .catch((err) => {
@@ -173,7 +156,7 @@ const userInfo = new UserInfo(profileName, profileAbout);
       // Изначальная отрисовка карточек
       api.getInitialCards()
         .then((Cards) => {
-          renderCards(Cards)
+          cardList.renderItems(Cards);
         })
         .catch((err) => {
           console.log(err);
@@ -185,24 +168,24 @@ const userInfo = new UserInfo(profileName, profileAbout);
 
 const newEditForm = new PopupWithForm (popupEdit, {handleFormSubmit: (profileValues) => {
 
-  const submitButton = document.querySelector(popupEdit).querySelector(validationParameters.submitButtonSelector);
-  submitButton.textContent = 'Сохранение...';
+  editSubmitButton.textContent = 'Сохранение...';
 
-  api.patchUserInfo(JSON.stringify({
+  api.patchUserInfo({
     name: profileValues[profileNameInput.name],
     about: profileValues[profileAboutInput.name]
-  }))
+  })
     .then((result) => {
-      profileAvatar.src = result.avatar;
       userInfo.setUserInfo(result);
     })
     .catch((err) => {
       console.log(err);
     })
     .then(() => {
-      submitButton.textContent = 'Сохранено';
+      editSubmitButton.textContent = 'Сохранено';
       newEditForm.close();
-      setTimeout(() => {submitButton.textContent = 'Сохранить'}, 500);
+    })
+    .finally(() => {
+      setTimeout(() => {editSubmitButton.textContent = 'Сохранить'}, 500);
     })
 }});
 
@@ -227,20 +210,21 @@ editButton.addEventListener('click', () => {
 
 const newAvatarForm = new PopupWithForm (popupAvatar, {handleFormSubmit: (profileValues) => {
 
-  const submitButton = document.querySelector(popupAvatar).querySelector(validationParameters.submitButtonSelector);
-  submitButton.textContent = 'Сохранение...';
+  avatarSubmitButton.textContent = 'Сохранение...';
 
-    api.patchUserAvatar(JSON.stringify({avatar: profileValues[profileAvatarInput.name]}))
+    api.patchUserAvatar({avatar: profileValues[profileAvatarInput.name]})
       .then((result) => {
-        profileAvatar.src = result.avatar;
+        userInfo.setUserInfo(result);
       })
       .catch((err) => {
         console.log(err);
       })
       .then(() => {
-        submitButton.textContent = 'Сохранено';
+        avatarSubmitButton.textContent = 'Сохранено';
         newAvatarForm.close();
-        setTimeout(() => {submitButton.textContent = 'Сохранить'}, 500);
+      })
+      .finally(() => {
+        setTimeout(() => {avatarSubmitButton.textContent = 'Сохранить'}, 500);
       })
 }});
 
@@ -259,28 +243,25 @@ editAvatarButton.addEventListener('click', () => {
 
 const addPopupForm = new PopupWithForm (popupAdd, {handleFormSubmit: (addValues) => {
 
-  const submitButton = document.querySelector(popupAdd).querySelector(validationParameters.submitButtonSelector);
-  submitButton.textContent = 'Создание карточки...';
+  addSubmitButton.textContent = 'Создание карточки...';
 
-    api.addNewCard(JSON.stringify({
+    api.addNewCard({
           name: addValues[addNameInput.name],
           link: addValues[addLinkInput.name]
-        }))
-      .then (() => {
-        api.getInitialCards()
-          .then((Cards) => {
-            document.querySelector(sectionSelector).innerHTML = '';
-            renderCards(Cards)
+        })
+      .then((Card) => {
+          cardList.prependItem(createCard(Card))
           })
           .catch((err) => {
             console.log(err);
           })
           .then(() => {
-            submitButton.textContent = 'Карточка создана';
+            addSubmitButton.textContent = 'Карточка создана';
             addPopupForm.close();
-            setTimeout(() => {submitButton.textContent = 'Создать'}, 500);
-          });
-      })
+          })
+          .finally(() => {
+            setTimeout(() => {addSubmitButton.textContent = 'Создать'}, 500);
+          })
       .catch((err) => {
         console.log(err);
       })
