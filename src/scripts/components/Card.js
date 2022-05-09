@@ -26,15 +26,24 @@ export class Card {
 
   disableCardDeletion(newData, userId) {
     if (userId !== newData.owner._id) {
-      this._cardElement.querySelector('.element__trash-btn').remove();
+      this._trashButton.remove();
     }
   }
 
   markLikedCard(newData, userId) {
     if (newData.likes.some(list => list._id === userId)) {
-      this._cardElement.querySelector('.element__like-btn').classList.add('element__like-btn_liked');
+      this._likeButton.classList.add('element__like-btn_liked');
     }
   }
+
+  deleteLike() {
+    this._likeButton.classList.remove('element__like-btn_liked');
+  }
+
+  putLike() {
+    this._likeButton.classList.add('element__like-btn_liked');
+  }
+
 
   createCard () {
     this._cardElementText.textContent = this._data.name;

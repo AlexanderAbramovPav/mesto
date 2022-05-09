@@ -8,8 +8,8 @@ export default class Section {
     this._container.append(item);
   }
 
-  renderItems(Cards) {
-    Cards.forEach(item => {
+  renderItems(cards) {
+    cards.forEach(item => {
       this._renderer(item);
     });
   }
