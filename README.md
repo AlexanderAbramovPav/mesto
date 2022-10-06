@@ -6,8 +6,6 @@ In our modern digital world it is crucial to be "in the moment" and fell connect
 ## Technologies
 The project is designed to train skills in a real project, responsive web page layout skills and add interactivity to interface elements.
 
-Repository for the `Mesto` project application, which includes frontend and backend parts of the application with the following features: user authorization and registration, operations with cards and users. Place the backend in the `backend/` directory, and the frontend in `frontend/`.
-
 In the process of creating the project, the following approaches and technologies were used:
 * HTML5
 * CSS3
